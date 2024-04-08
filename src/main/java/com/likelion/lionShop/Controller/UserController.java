@@ -31,7 +31,7 @@ public class UserController {
     // 3. 사용자를 수정하는 컨트롤러를 만듭니다.
     // 이때 log.info를 이용를여 사용자의 이름, 주소를 출력해줍니다. return 값은 "사용자 수정"입니다.
     @PutMapping("")
-    public String updateUser(@RequestBody UpdateUserRequestDto updateUserRequestDto, @PathVariable long userId){
+    public String updateUser(@RequestBody UpdateUserRequestDto updateUserRequestDto){
         log.info(updateUserRequestDto.getName());
         log.info(updateUserRequestDto.getAddress());
         return "사용자 수정";
