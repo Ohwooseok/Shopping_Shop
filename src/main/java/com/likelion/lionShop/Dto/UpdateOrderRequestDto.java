@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @Getter
 public class UpdateOrderRequestDto {
 
+    //상품 id
+    public Long id;
+
     //상품 이름
     public String name;
 
