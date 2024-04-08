@@ -13,7 +13,7 @@ import java.util.List;
 public class OrderController {
 
     // 1. 주문을 생성하는 컨트롤러를 만듭니다. 이때 return 값은 "주문 생성하기"입니다. -> 주문은 리스트 형태로 요청을 보내주세요!
-    @PostMapping("post")
+    @PostMapping("/post")
     public String createOrder(@RequestBody List<CreateOrderRequestDto> createOrderRequestDtoList){
         return "주문 생성하기";
     }
