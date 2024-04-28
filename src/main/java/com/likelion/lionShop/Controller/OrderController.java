@@ -1,7 +1,7 @@
 package com.likelion.lionShop.Controller;
 
-import com.likelion.lionShop.Dto.CreateOrderRequestDto;
-import com.likelion.lionShop.Dto.UpdateOrderRequestDto;
+import com.likelion.lionShop.Dto.request.CreateOrderRequestDto;
+import com.likelion.lionShop.Dto.request.UpdateOrderRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
