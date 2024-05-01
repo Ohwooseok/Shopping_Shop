@@ -1,7 +1,7 @@
 package com.likelion.lionShop.Controller;
 
-import com.likelion.lionShop.Dto.CreateUserRequestDto;
-import com.likelion.lionShop.Dto.UpdateUserRequestDto;
+import com.likelion.lionShop.Dto.request.CreateUserRequestDto;
+import com.likelion.lionShop.Dto.request.UpdateUserRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ public class UserController {
     public String createUser(@RequestBody CreateUserRequestDto createUserRequestDto){
         log.info(createUserRequestDto.getName());
         log.info(createUserRequestDto.getAddress());
-        log.info(createUserRequestDto.getId());
+        log.info(createUserRequestDto.getLoginId());
         log.info(createUserRequestDto.getPassword());
         return "사용자 생성";
     }
