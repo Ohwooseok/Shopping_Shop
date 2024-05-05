@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="order")
+@Table(name="orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,9 @@ public class Order {
 
     @Column
     private int price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     public void update(UpdateOrderRequestDto updateOrderRequestDto) {
         name = updateOrderRequestDto.getName();

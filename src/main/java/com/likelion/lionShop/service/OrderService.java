@@ -4,54 +4,64 @@ import com.likelion.lionShop.Dto.request.CreateOrderRequestDto;
 import com.likelion.lionShop.Dto.request.UpdateOrderRequestDto;
 import com.likelion.lionShop.Dto.response.OrderResponseDto;
 import com.likelion.lionShop.entity.Order;
+import com.likelion.lionShop.repository.OrderRepository;
+import com.likelion.lionShop.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class OrderService {
 
-    public void createOrder(List<CreateOrderRequestDto> createOrderRequestDtoList) {
-        createOrderRequestDtoList.forEach(orderRequestDto -> {
-            log.info("[Order Service ] 주문 생성 이름 ---> {}", orderRequestDto.getName());
+    private final OrderRepository orderRepository;
 
-            //DTO를 Entity로 변환
-            Order order = orderRequestDto.toEntity();
-
-            //DB에 저장 로직이 들어갈 부분 (다음 주차)
-
-        });
+    public List<OrderResponseDto> createOrders(List<CreateOrderRequestDto> createOrderRequestDtoList) {
+        return createOrderRequestDtoList.stream()
+                .map(this::createOrder)
+                .collect(Collectors.toList());
     }
 
+    public OrderResponseDto createOrder(CreateOrderRequestDto createOrderRequestDto){
+        Order order = createOrderRequestDto.toEntity();
+        orderRepository.save(order);
+        return OrderResponseDto.from(order);
+    }
+
+    @Transactional
     public OrderResponseDto getOrder(Long orderId) {
-        log.info("[Order Service] 주문 가져오기 ID ---> {}", orderId);
 
         //DB에서 가져오는 로직이 들어갈 부분 (다음 주차)
-
-        //(임시) Order Entity
-        Order order = new Order();
+        Order order = orderRepository.findById(orderId).orElseThrow(()-> new IllegalArgumentException("상품이 존재하지 않습니다."));
 
         return OrderResponseDto.from(order);
     }
 
+    @Transactional
     public void deleteOrder(Long orderId) {
-        log.info("[Order Service] 주문 삭제하기 ID ---> {}", orderId);
 
         //DB에서 삭제하는 로직이 들어갈 부분 (다음 주차)
+        orderRepository.deleteById(orderId);
 
     }
 
-    public void updateOrder(UpdateOrderRequestDto updateOrderRequestDto) {
-        log.info("[Order Service] 주문 수정하기 ID ---> {}", updateOrderRequestDto.getId());
-        //DB에서 가져오는 로직이 들어갈 부분 (다음 주차)
-        //임시 Order Entity
-        Order order = new Order();
-
-        //DB에서 수정하는 로직이 들어갈 부분
+    @Transactional
+    public OrderResponseDto updateOrder(UpdateOrderRequestDto updateOrderRequestDto) {
+        //DB에서 가져오는 로직이 들어갈 부분
+        Order order = orderRepository.findById(updateOrderRequestDto.getId()).orElseThrow(() -> new IllegalArgumentException("상품이 존재하지 않습니다."));
         order.update(updateOrderRequestDto);
 
-        //DB에 저장 로직이 들어갈 부분 (다음 주차)
+        //DB에 저장 로직이 들어갈 부분
+        orderRepository.save(order);
+
+        return OrderResponseDto.from(order);
     }
 }
