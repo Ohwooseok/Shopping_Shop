@@ -24,19 +24,20 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
+    @Transactional
     public List<OrderResponseDto> createOrders(List<CreateOrderRequestDto> createOrderRequestDtoList) {
         return createOrderRequestDtoList.stream()
                 .map(this::createOrder)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public OrderResponseDto createOrder(CreateOrderRequestDto createOrderRequestDto){
         Order order = createOrderRequestDto.toEntity();
         orderRepository.save(order);
         return OrderResponseDto.from(order);
     }
 
-    @Transactional
     public OrderResponseDto getOrder(Long orderId) {
 
         //DB에서 가져오는 로직이 들어갈 부분 (다음 주차)
