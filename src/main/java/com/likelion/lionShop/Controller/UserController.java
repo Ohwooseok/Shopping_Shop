@@ -38,7 +38,7 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUser(updateUserRequestDto));
     }
     // 4. 사용자를 삭제하는 컨트롤러를 만듭니다.
-    // 이때 log.info 이용하여 사용자의 ID를 출력해줍tm니다. return 값은 "사용자 삭제"입니다.
+    // 이때 log.info 이용하여 사용자userI의 ID를 출력해줍tm니다. return 값은 "사용자 삭제"입니다.
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUser(@RequestParam("id") Long userId){
         userService.deleteUser(userId);

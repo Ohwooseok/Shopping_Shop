@@ -1,6 +1,7 @@
 package com.likelion.lionShop.Dto.request;
 
 import com.likelion.lionShop.entity.Order;
+import com.likelion.lionShop.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,11 +20,13 @@ public class CreateOrderRequestDto {
     //가격
     public int price;
 
+    public User user;
     public Order toEntity(){
         return Order.builder()
                 .name(name)
                 .quantity(quantity)
                 .price(price)
+                .user(user)
                 .build();
     }
 
