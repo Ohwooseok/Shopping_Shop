@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @Entity
 @AllArgsConstructor
@@ -30,6 +32,9 @@ public class User {
 
     @Column
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders;
 
     public void update(UpdateUserRequestDto userRequestDto) {
         name = userRequestDto.getName();
