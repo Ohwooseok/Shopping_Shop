@@ -28,16 +28,19 @@ public class User {
     private String address;
 
     @Column
-    private String loginId;
+    private String email;
 
     @Column
     private String password;
+
+    @Column
+    private String roles;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders;
 
     public void update(UpdateUserRequestDto userRequestDto) {
-        name = userRequestDto.getName();
+        name = userRequestDto.getEmail();
         address = userRequestDto.getAddress();
     }
 }
