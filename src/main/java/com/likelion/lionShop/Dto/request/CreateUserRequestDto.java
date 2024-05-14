@@ -4,6 +4,7 @@ import com.likelion.lionShop.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @NoArgsConstructor //매개변수 없는 생성자를 생성해 줍니다.
 @AllArgsConstructor //모든 매개변수를 받는 생성자를 생성해 줍니다.
@@ -12,18 +13,20 @@ public class CreateUserRequestDto {
 
     public String name;
 
-    public String loginId;
+    public String email;
 
     public String password;
 
     public String address;
 
-    public User toEntity() {
+    public User toEntity(PasswordEncoder passwordEncoder) {
+        String encodePassword = passwordEncoder.encode(password);
         return User.builder()
                 .name(name)
-                .loginId(loginId)
-                .password(password)
+                .email(email)
+                .password(encodePassword)
                 .address(address)
+                .roles("USER")
                 .build();
     }
 }

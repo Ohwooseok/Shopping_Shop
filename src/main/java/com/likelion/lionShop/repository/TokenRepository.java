@@ -1,16 +1,13 @@
 package com.likelion.lionShop.repository;
 
 import com.likelion.lionShop.entity.Token;
-import com.likelion.lionShop.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
+public interface TokenRepository extends JpaRepository<Token, Long> {
 
-    void deleteByEmail(String email);
-
+    Optional<Token> findByEmail(String email);
 }

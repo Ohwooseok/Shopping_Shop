@@ -30,9 +30,7 @@ public class OrderService {
                 .map(this::createOrder)
                 .collect(Collectors.toList());
     }
-
-    @Transactional
-    public OrderResponseDto createOrder(CreateOrderRequestDto createOrderRequestDto){
+    private OrderResponseDto createOrder(CreateOrderRequestDto createOrderRequestDto){
         Order order = createOrderRequestDto.toEntity();
         orderRepository.save(order);
         return OrderResponseDto.from(order);
@@ -51,6 +49,7 @@ public class OrderService {
 
         //DB에서 삭제하는 로직이 들어갈 부분 (다음 주차)
         orderRepository.deleteById(orderId);
+        log.info("[Order Service] 주문 삭제하기 ID ---> {}", orderId);
 
     }
 
@@ -62,6 +61,10 @@ public class OrderService {
 
         //DB에 저장 로직이 들어갈 부분
         orderRepository.save(order);
+        log.info("[Order Service] 주문 수정하기 ID ---> {}", updateOrderRequestDto.getId());
+        log.info("[Order Service] 주문 수정하기 이름 ---> {}",updateOrderRequestDto.getName());
+        log.info("[Order Service] 주문 수정하기 수량 ---> {}", updateOrderRequestDto.getQuantity());
+        log.info("[Order Service] 주문 수정하기 가격 ---> {}", updateOrderRequestDto.getPrice());
 
         return OrderResponseDto.from(order);
     }
