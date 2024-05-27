@@ -1,6 +1,6 @@
 package com.likelion.lionShop.repository;
 
-import com.likelion.lionShop.entity.Token;
+import com.likelion.lionShop.Security.entity.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
