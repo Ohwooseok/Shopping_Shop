@@ -3,7 +3,7 @@ package com.likelion.lionShop.Security.service;
 
 import com.likelion.lionShop.Security.Dto.response.JwtDto;
 import com.likelion.lionShop.Security.entity.Token;
-import com.likelion.lionShop.repository.TokenRepository;
+import com.likelion.lionShop.Security.repository.TokenRepository;
 import com.likelion.lionShop.Security.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

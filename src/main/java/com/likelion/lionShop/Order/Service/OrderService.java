@@ -34,6 +34,8 @@ public class OrderService {
     }
     private OrderResponseDto createOrder(CreateOrderRequestDto createOrderRequestDto){
         Order order = createOrderRequestDto.toEntity();
+
+        // 주문한 상품의 Quantity만큼 해당 상품의 Stock 감소
         Optional<Item> item = itemRepository.findById(createOrderRequestDto.getItemId());
         item.get().removeStock(createOrderRequestDto.getQuantity());
 
@@ -51,6 +53,7 @@ public class OrderService {
 
     @Transactional
     public void deleteOrder(Long orderId, CreateOrderRequestDto createOrderRequestDto) {
+        // 취소한 Quantity 만큼 해당 Item의 Stock을 증가
         Optional<Item> item = itemRepository.findById(createOrderRequestDto.getItemId());
         item.get().plusStock(createOrderRequestDto.getQuantity());
         //DB에서 삭제하는 로직이 들어갈 부분 (다음 주차)

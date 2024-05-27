@@ -37,6 +37,7 @@ public class Item {
         stock = updateItemRequestDto.getStock();
     }
 
+    //주문한 수량만큼 Stock을 감소
     public void removeStock(int stockNumber) {
         int restStock = this.stock - stockNumber;
         if(restStock < 0) {

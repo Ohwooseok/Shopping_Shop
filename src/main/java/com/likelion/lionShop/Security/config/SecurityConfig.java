@@ -77,7 +77,7 @@ public class SecurityConfig {
         // 경로별 인가
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         //위에서 정의했던 allowedUrls 들은 인증이 필요하지 않음 -> permitAll
                         .requestMatchers(allowedUrls).permitAll()
                         .anyRequest().authenticated() // 그 외의 url 들은 인증이 필요함

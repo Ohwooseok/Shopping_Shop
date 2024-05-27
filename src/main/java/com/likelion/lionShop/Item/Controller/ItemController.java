@@ -33,14 +33,14 @@ public class ItemController {
         return ResponseEntity.ok(itemResponseDto);
 
     }
-    @PutMapping("/item/{itemId}")
+    @PutMapping("/admin/item/{itemId}")
     public ResponseEntity<?> updateItem(@AuthenticationPrincipal UserDetails userDetails, @RequestBody UpdateItemRequestDto updateItemRequestDto){
         ItemResponseDto itemResponseDto = itemService.updateItem(updateItemRequestDto, userDetails);
         return ResponseEntity.ok(itemResponseDto);
     }
 
 
-    @DeleteMapping("/item/{itemId}")
+    @DeleteMapping("/admin/item/{itemId}")
     public ResponseEntity<Void> deleteItem(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long itemId) {
         itemService.deleteItem(itemId, userDetails);
         return ResponseEntity.noContent().build();

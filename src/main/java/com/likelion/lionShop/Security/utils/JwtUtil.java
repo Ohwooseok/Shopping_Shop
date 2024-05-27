@@ -3,7 +3,7 @@ package com.likelion.lionShop.Security.utils;
 
 import com.likelion.lionShop.Security.Dto.response.JwtDto;
 import com.likelion.lionShop.Security.entity.Token;
-import com.likelion.lionShop.repository.TokenRepository;
+import com.likelion.lionShop.Security.repository.TokenRepository;
 import com.likelion.lionShop.Security.userDetails.CustomUserDetails;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SecurityException;
